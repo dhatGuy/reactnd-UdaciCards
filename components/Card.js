@@ -9,8 +9,8 @@ const Card = (props) => {
     <View>
       <TouchableOpacity onPress={props.onPress}>
         <View>
-          <Text>JavsScript</Text>
-          <Text>12 Cards</Text>
+          <Text>{props.title}</Text>
+  <Text>{`${props.question.length} cards`}</Text>
         </View>
       </TouchableOpacity>
     </View>
