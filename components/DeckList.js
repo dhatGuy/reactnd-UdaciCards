@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { View, Text } from "react-native";
+import { View, Text, FlatList, ScrollView } from "react-native";
 import Card from "./Card";
-import { getDecks } from "../utils/api";
+import { useSelector, useDispatch } from "react-redux";
+import { handleInitialData } from "../actions";
 
 const DeckList = ({ navigation }) => {
-  const [decks, setDecks] = useState(null);
+  const decks = useSelector(state => state)
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getDecks().then((data) => setDecks(data));
+    dispatch(handleInitialData())
   }, []);
-  
-  if(decks === null) return null
+
   return (
-    <View>
+    <ScrollView>
       {Object.keys(decks).map((key) => (
         <Card
           key={key}
           title={decks[key].title}
           question={decks[key].questions}
-          onPress={() => navigation.navigate("Individual Card")}
+          onPress={() => navigation.navigate("Individual Card", {id: key})}
         />
       ))}
-    </View>
-  );
+    </ScrollView>
+  )
 };
 
 export default DeckList;

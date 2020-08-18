@@ -3,24 +3,27 @@ import { AsyncStorage } from "react-native"
 export const STORAGE_KEY = "flashcards"
 // return all of the decks along with their titles, questions, and answers. 
 export const getDecks = async () => {
-  const data = await AsyncStorage.getItem(STORAGE_KEY)
-  return JSON.parse(data)
+  try {
+    const data = await AsyncStorage.getItem(STORAGE_KEY)
+    return data
+  } catch (error) {
+    alert("An error occurred while fetching the data.")
+  }
 }
 
 // take in a single id argument and return the deck associated with that id. 
 export const getDeck = async (id) => {
-  const data = await AsyncStorage.getItem(STORAGE_KEY)
-  const deck = JSON.parse(data)
-  return deck[id]
+    const data = await AsyncStorage.getItem(STORAGE_KEY)
+    const deck = JSON.parse(data)
+    return deck[id]
+  
 };
 
 // take in a single title argument and add it to the decks.
-export const saveDeckTitle = async(title) => {
-  const decks = getDecks()
-  if(Object.keys(decks).includes(title)) return false
+export const saveDeckTitle = async(deck) => {
   await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-    [title]:{
-      title: title,
+    [deck]:{
+      title: deck,
       questions:[
 
       ]
@@ -30,15 +33,14 @@ export const saveDeckTitle = async(title) => {
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title. 
 export const addCardToDeck = async (title,card)=>{
-  const decks = await AsyncStorage.getItem(STORAGE_KEY);
-  const data = JSON.parse(decks);
-  const newDecks = {
-    ...data,
+  // console.log(title);
+  const deck = await getDeck(title)
+  const newDeck = {
     [title]: {
-      questions: [...title.questions, card]
+      questions: [...deck.questions, card]
     }
-  };
-  AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks));
+  }
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));
 }
 
 // {
