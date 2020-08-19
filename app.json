@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile-Flashcards",
-    "slug": "mobile-Flashcards",
+    "name": "mobile-flashcards",
+    "slug": "mobile-flashcards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +26,6 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "Udacity React Nanodegree Final Project",
-    "githubUrl": "https://github.com/dhatGuy/reactnd-mobileFlashcards"
+    "githubUrl": "https://github.com/dhatGuy/reactnd-mobile-flashcards"
   }
 }

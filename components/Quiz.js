@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import FlipCard from "react-native-flip-card";
 import { deleteCard } from "../actions";
@@ -8,6 +8,48 @@ import {
   cancelAllNotifications,
   setNotification,
 } from "../utils/notifications";
+import { Text, Button } from "react-native-paper";
+import styled from "styled-components/native";
+
+const Wrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+const QuizWrapper = styled.View`
+  flex: 1;
+  width: 90%;
+  margin: 0 auto;
+`;
+
+const QueAns = styled.Text`
+  font-size: 30px;
+`;
+
+const Score = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+const Face = styled.View`
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  align-items: center;
+`;
+
+const Back = styled.View`
+  flex: 1;
+  background-color: #f1c40f;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BtnWrapper = styled.View`
+  flex: 1;
+  margin-top: 10px;
+`;
 
 const Quiz = ({ route, navigation }) => {
   const deck = useSelector((state) => state[route.params.id]);
@@ -44,33 +86,39 @@ const Quiz = ({ route, navigation }) => {
 
   if (length === 0) {
     return (
-      <View>
-        <Text>No Question is available. Add question</Text>
-      </View>
+      <Wrapper>
+        <Text>This deck is empty.</Text>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("New Card", { id: deck.title })}
+        >
+          Add card
+        </Button>
+      </Wrapper>
     );
   }
 
   if (incorrect + correct === length) {
     return (
-      <View>
-        <Text>Quiz done</Text>
-        <Text>You got {((correct / length) * 100).toFixed(0)}%</Text>
-        <Button
-          title="reset quiz"
-          onPress={reset}
-        />
-      </View>
+      <Wrapper>
+        <Text style={{ fontSize: 23 }}>Quiz done</Text>
+        <Text style={{ fontSize: 25 }}>
+          You got {((correct / length) * 100).toFixed(0)}%
+        </Text>
+        <Button mode="contained" onPress={reset}>
+          reset quiz
+        </Button>
+      </Wrapper>
     );
   }
   return (
-    // <View>
-    <>
-      <View>
-        <Text>{`${count + 1}/${length}`}</Text>
-      </View>
+    <QuizWrapper>
+      <Score>
+        <Text style={{ fontSize: 20 }}>{`${count + 1}/${length}`}</Text>
+      </Score>
       <View style={{ height: 50, justifyContent: "space-between", flex: 1 }}>
         <FlipCard
-          style={styles.card}
+          style={{ width: "100%", marginBottom: 10 }}
           friction={6}
           flip={flip}
           perspective={1000}
@@ -78,41 +126,40 @@ const Quiz = ({ route, navigation }) => {
           flipVertical={false}
           clickable={false}
         >
-          <View style={styles.face}>
-            <Text>Question: {deck.questions[count].question}</Text>
-          </View>
-          <View style={styles.back}>
-            <Text>answer: {deck.questions[count].answer}</Text>
-          </View>
+          <Face>
+            <QueAns>{deck.questions[count].question}</QueAns>
+          </Face>
+          <Back>
+            <QueAns>{deck.questions[count].answer}</QueAns>
+          </Back>
         </FlipCard>
-        <Button title="flip" onPress={() => setFlip(!flip)} />
-        <View style={{ flex: 1 }}>
-          <Button title="correct" onPress={handleCorrect} />
-          <Button title="incorrect" onPress={handleIncorrect} />
+        <Button mode="contained" onPress={() => setFlip(!flip)}>
+          flip
+        </Button>
+        <BtnWrapper>
           <Button
-            title="delete"
+            style={{ marginBottom: 10 }}
+            mode="outlined"
+            onPress={handleCorrect}
+          >
+            Correct
+          </Button>
+          <Button
+            style={{ marginBottom: 10 }}
+            mode="outlined"
+            onPress={handleIncorrect}
+          >
+            Incorrect
+          </Button>
+          <Button
+            style={{ marginBottom: 10 }}
             onPress={() => handleDeleteCard(deck.title, count)}
-          />
-        </View>
+          >
+            delete card
+          </Button>
+        </BtnWrapper>
       </View>
-    </>
+    </QuizWrapper>
   );
 };
-const styles = StyleSheet.create({
-  card: {
-    width: "100%",
-  },
-  face: {
-    flex: 1,
-    backgroundColor: "#2ecc71",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  back: {
-    flex: 1,
-    backgroundColor: "#f1c40f",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 export default Quiz;

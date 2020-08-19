@@ -1,25 +1,42 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { View, Text, FlatList, ScrollView, Button } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import Card from "./Card";
 import { useSelector, useDispatch } from "react-redux";
 import { handleInitialData } from "../actions";
+import styled from "styled-components/native";
+import { Button } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+const Empty = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 const DeckList = ({ navigation }) => {
-  const decks = useSelector(state => state)
-  const dispatch = useDispatch()
+  const decks = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(handleInitialData())
+    dispatch(handleInitialData());
   }, []);
 
-  if(Object.keys(decks).length === 0){
+  if (Object.keys(decks).length === 0) {
     return (
-      <View>
-        <Text>Deck List is empty</Text>
-        <Button title="Add deck" onPress={()=>navigation.navigate("New Deck")}/>
-      </View>
-    )
+      <Empty>
+        <MaterialCommunityIcons
+          name="delete-empty-outline"
+          size={60}
+          color="black"
+        />
+        <Text>Deck List is empty.</Text>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("New Deck")}
+        >
+          add deck
+        </Button>
+      </Empty>
+    );
   }
 
   return (
@@ -29,11 +46,11 @@ const DeckList = ({ navigation }) => {
           key={key}
           title={decks[key].title}
           questions={decks[key].questions}
-          onPress={() => navigation.navigate("Individual Card", {id: key})}
+          onPress={() => navigation.navigate("Individual Card", { id: key })}
         />
       ))}
     </ScrollView>
-  )
+  );
 };
 
 export default DeckList;

@@ -1,43 +1,93 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
 import DeckList from "./components/DeckList";
 import IndividualCard from "./components/IndividualCard";
 import NewDeck from "./components/NewDeck";
 import NewCard from "./components/NewCard";
 import Quiz from "./components/Quiz";
-import {Platform} from 'react-native'; 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import Card from "./components/Card";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import reducers from "./reducers";
 import middlewares from "./middlewares/logger";
 import { setNotification } from "./utils/notifications";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import {
+  FontAwesome,
+  MaterialCommunityIcons,
+  Ionicons,
+} from "@expo/vector-icons";
 
 const store = createStore(reducers, middlewares);
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-
-
 const Tabs = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={DeckList} />
-      <Tab.Screen name="New Deck" component={NewDeck} />
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: "white",
+        inactiveTintColor: "grey",
+        showLabel: false,
+        tabStyle: {
+          backgroundColor: "tomato",
+        },
+      }}
+    >
+      <Tab.Screen
+        options={{
+          tabBarLabel: "Decks",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="cards-outline"
+              size={35}
+              color={color}
+            />
+          ),
+        }}
+        name="Home"
+        component={DeckList}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="md-add-circle-outline" size={35} color={color} />
+          ),
+        }}
+        name="New Deck"
+        component={NewDeck}
+      />
     </Tab.Navigator>
   );
 };
 
 const Navigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Flashcards" component={Tabs} />
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "tomato",
+        },
+      }}
+      headerMode="screen"
+    >
+      <Stack.Screen
+        name="Flashcards"
+        component={Tabs}
+        options={{
+          headerStyle: {
+            backgroundColor: "tomato",
+          },
+          headerTitleAlign: "center",
+        }}
+      />
       <Stack.Screen
         name="Individual Card"
+        options={{ title: "Deck" }}
         component={IndividualCard}
       />
       <Stack.Screen name="New Card" component={NewCard} />
@@ -47,15 +97,26 @@ const Navigator = () => {
   );
 };
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "tomato",
+    accent: "yellow",
+  },
+};
+
 export default function App() {
-  useEffect(()=>{
-    setNotification()
-  },[])
+  useEffect(() => {
+    setNotification();
+  }, []);
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Navigator />
-      </NavigationContainer>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <Navigator />
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
   );
 }

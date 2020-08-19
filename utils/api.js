@@ -1,77 +1,77 @@
-import { AsyncStorage } from "react-native"
+import { AsyncStorage } from "react-native";
 
-export const STORAGE_KEY = "flashcards"
+export const STORAGE_KEY = "flashcards";
 
-// return all of the decks along with their titles, questions, and answers. 
+// return all of the decks along with their titles, questions, and answers.
 export const getDecks = async () => {
   try {
-    const data = await AsyncStorage.getItem(STORAGE_KEY)
-    return data
+    const data = await AsyncStorage.getItem(STORAGE_KEY);
+    return data;
   } catch (error) {
-    alert("An error occurred while fetching the data.")
+    alert("An error occurred while fetching the data.");
   }
-}
+};
 
-// take in a single id argument and return the deck associated with that id. 
+// take in a single id argument and return the deck associated with that id.
 export const getDeck = async (id) => {
-    const data = await AsyncStorage.getItem(STORAGE_KEY)
-    const deck = JSON.parse(data)
-    return deck[id]
-  
+  const data = await AsyncStorage.getItem(STORAGE_KEY);
+  const deck = JSON.parse(data);
+  return deck[id];
 };
 
 // take in a single title argument and add it to the decks.
-export const saveDeckTitle = async(deck) => {
-  await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-    [deck]:{
-      title: deck,
-      questions:[
+export const saveDeckTitle = async (deck) => {
+  await AsyncStorage.mergeItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      [deck]: {
+        title: deck,
+        questions: [],
+      },
+    })
+  );
+};
 
-      ]
-    }
-  }))
-}
+// take in deck title and delete the deck
+export const removeDeck = async (deck) => {
+  const data = await getDecks();
+  const decks = JSON.parse(data);
 
-// take in deck title and delete the deck 
-export const removeDeck = async(deck) =>{
-  const data = await getDecks()
-  const decks = JSON.parse(data)
+  const { [deck]: deleted, ...newDecks } = decks;
+  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks));
+};
 
-  const { [deck]: deleted, ...newDecks} = decks;  
-  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
-}
-
-// take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title. 
-export const addCardToDeck = async (title,card)=>{
-  const deck = await getDeck(title)
+// take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
+export const addCardToDeck = async (title, card) => {
+  const deck = await getDeck(title);
   const newDeck = {
     [title]: {
-      questions: [...deck.questions, card]
-    }
-  }
+      questions: [...deck.questions, card],
+    },
+  };
   return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));
-}
+};
 
 // take in deck title and card index(id) and will delete card from deck with the associated title
-export const removeCard = async(title, id)=>{
-  const data = await getDecks()
-  const decks = JSON.parse(data)
-  const ques = decks[title].questions
+export const removeCard = async (title, id) => {
+  const data = await getDecks();
+  const decks = JSON.parse(data);
+  const ques = decks[title].questions;
 
   const newDecks = {
     ...decks,
-    [title]:{
+    [title]: {
       ...decks[title],
-      questions:decks[title].questions.filter((item, index) => index !== id)
-  }
-}
-  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
-}
+      questions: decks[title].questions.filter((item, index) => index !== id),
+    },
+  };
+  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks));
+};
 
 // deletes all data
-export const resetStore = async()=>{
-  return await AsyncStorage.clear()
-}
+export const resetStore = async () => {
+  return await AsyncStorage.clear();
+};
 
 // {
 //   React: {

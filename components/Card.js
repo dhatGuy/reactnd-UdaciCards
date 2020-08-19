@@ -1,23 +1,38 @@
 import React from "react";
-import styled from "styled-components";
-import { View, Text, Button, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Button } from "react-native";
+import styled from "styled-components/native";
+
+const Container = styled.TouchableHighlight`
+  border: 1px solid tomato;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 10px auto;
+  height: 100px;
+`;
+
+const CardContainer = styled.View`
+  width: 100%;
+  align-items: center;
+`
+const Title = styled.Text`
+  font-size: 26px;
+`
+
+const TotalCard = styled.Text``
 
 const Card = (props) => {
-  const navigation = useNavigation();
   return (
-    <View>
-      <TouchableOpacity onPress={props.onPress}>
-        <View>
-          <Text>{props.title}</Text>
-          <Text>
+      <Container underlayColor="#fff" onPress={props.onPress}>
+        <CardContainer>
+          <Title>{props.title}</Title>
+          <TotalCard>
             {props.questions.length >= 2
               ? `${props.questions.length} Cards`
               : `${props.questions.length} Card`}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+          </TotalCard>
+        </CardContainer>
+      </Container>
   );
 };
 
