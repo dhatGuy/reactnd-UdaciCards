@@ -8,7 +8,6 @@ const NewCard = ({route, navigation }) => {
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState("")
   const dispatch = useDispatch()
-  // console.log(route.params.title);
 
   const onSubmit = () => {
     const title = route.params.title

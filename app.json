@@ -16,11 +16,16 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "useNextNotificationsApi": true
+    },
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Udacity React Nanodegree Final Project",
+    "githubUrl": "https://github.com/dhatGuy/reactnd-mobileFlashcards"
   }
 }

@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native"
 
 export const STORAGE_KEY = "flashcards"
+
 // return all of the decks along with their titles, questions, and answers. 
 export const getDecks = async () => {
   try {
@@ -31,6 +32,7 @@ export const saveDeckTitle = async(deck) => {
   }))
 }
 
+// take in deck title and delete the deck 
 export const removeDeck = async(deck) =>{
   const data = await getDecks()
   const decks = JSON.parse(data)
@@ -50,6 +52,7 @@ export const addCardToDeck = async (title,card)=>{
   return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));
 }
 
+// take in deck title and card index(id) and will delete card from deck with the associated title
 export const removeCard = async(title, id)=>{
   const data = await getDecks()
   const decks = JSON.parse(data)
@@ -62,9 +65,10 @@ export const removeCard = async(title, id)=>{
       questions:decks[title].questions.filter((item, index) => index !== id)
   }
 }
-  // return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
+  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
 }
 
+// deletes all data
 export const resetStore = async()=>{
   return await AsyncStorage.clear()
 }

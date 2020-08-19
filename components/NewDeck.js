@@ -19,7 +19,6 @@ const NewDeck = ({ navigation }) => {
     setDeck("")
     navigation.navigate("Individual Card", {id: deck})
   }
-  // AsyncStorage.getItem(STORAGE_KEY).then(data=> console.log(JSON.parse(data)))
   return (
     <View>
       <Text>What is your deck title?</Text>

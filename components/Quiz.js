@@ -4,10 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import FlipCard from "react-native-flip-card";
 import { deleteCard } from "../actions";
 import { removeCard, resetStore } from "../utils/api";
+import {
+  cancelAllNotifications,
+  setNotification,
+} from "../utils/notifications";
 
 const Quiz = ({ route, navigation }) => {
   const deck = useSelector((state) => state[route.params.id]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
@@ -26,11 +30,17 @@ const Quiz = ({ route, navigation }) => {
   };
 
   const handleDeleteCard = (title, index) => {
-    removeCard(title, index).then((data)=>{
-      dispatch(deleteCard(title, index))
-    })
-    // resetStore().then(()=> console.log("Success"))
-  }
+    removeCard(title, index).then(() => {
+      dispatch(deleteCard(title, index));
+    });
+  };
+
+  const reset = () => {
+    setCount(0);
+    setCorrect(0);
+    setIncorrect(0);
+    cancelAllNotifications().then(setNotification());
+  };
 
   if (length === 0) {
     return (
@@ -47,11 +57,7 @@ const Quiz = ({ route, navigation }) => {
         <Text>You got {((correct / length) * 100).toFixed(0)}%</Text>
         <Button
           title="reset quiz"
-          onPress={() => {
-            setCount(0);
-            setCorrect(0);
-            setIncorrect(0);
-          }}
+          onPress={reset}
         />
       </View>
     );
@@ -83,7 +89,10 @@ const Quiz = ({ route, navigation }) => {
         <View style={{ flex: 1 }}>
           <Button title="correct" onPress={handleCorrect} />
           <Button title="incorrect" onPress={handleIncorrect} />
-          <Button title="delete" onPress={()=>handleDeleteCard(deck.title, count)}/>
+          <Button
+            title="delete"
+            onPress={() => handleDeleteCard(deck.title, count)}
+          />
         </View>
       </View>
     </>

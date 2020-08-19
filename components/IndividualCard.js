@@ -24,10 +24,12 @@ const IndividualCard = ({ route, navigation }) => {
       ),
     });
   }, [navigation]);
+
   if (!deck) return null;
+  
   return (
     <View>
-      <Card title={deck.title} question={deck.questions} />
+      <Card title={deck.title} questions={deck.questions} />
       <View>
         <Button
           title="Add Card"

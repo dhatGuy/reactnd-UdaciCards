@@ -5,14 +5,16 @@ import { useNavigation } from "@react-navigation/native";
 
 const Card = (props) => {
   const navigation = useNavigation();
-  // console.log("props ", props.title);
   return (
     <View>
       <TouchableOpacity onPress={props.onPress}>
         <View>
-          {/* <Text>Hello</Text> */}
           <Text>{props.title}</Text>
-          <Text>{`${props.question.length || 0} cards`}</Text>
+          <Text>
+            {props.questions.length >= 2
+              ? `${props.questions.length} Cards`
+              : `${props.questions.length} Card`}
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
