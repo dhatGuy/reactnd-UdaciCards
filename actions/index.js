@@ -22,9 +22,24 @@ export const addCard = (title, card) => ({
   card,
 });
 
+export const DELETE_DECK = 'DELETE_DECK';
+
+export const deleteDeck = deck => ({
+  type: DELETE_DECK,
+  deck
+});
+
 export const handleInitialData = () => {
   return async (dispatch) => {
     const decks = await getDecks();
     dispatch(receiveDecks(JSON.parse(decks)));
   };
 };
+
+export const DELETE_CARD = 'DELETE_CARD';
+
+export const deleteCard = (title, index) => ({
+  type: DELETE_CARD,
+  title, 
+  index
+});

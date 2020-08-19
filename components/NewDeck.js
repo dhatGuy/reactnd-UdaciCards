@@ -16,8 +16,8 @@ const NewDeck = ({ navigation }) => {
   const onPress = () => {
     saveDeckTitle(deck)
     .then(()=> dispatch(addDeck(deck)))
-    navigation.navigate("Individual Card", {id: deck})
     setDeck("")
+    navigation.navigate("Individual Card", {id: deck})
   }
   // AsyncStorage.getItem(STORAGE_KEY).then(data=> console.log(JSON.parse(data)))
   return (

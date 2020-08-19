@@ -8,12 +8,11 @@ import NewCard from "./components/NewCard";
 import Quiz from "./components/Quiz";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
 import Card from "./components/Card";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
-import thunk from "redux-thunk";
 import middlewares from "./middlewares/logger";
 
 const store = createStore(reducers, middlewares);

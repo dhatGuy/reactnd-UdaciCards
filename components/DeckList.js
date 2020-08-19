@@ -8,7 +8,6 @@ import { handleInitialData } from "../actions";
 const DeckList = ({ navigation }) => {
   const decks = useSelector(state => state)
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     dispatch(handleInitialData())

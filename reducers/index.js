@@ -1,4 +1,12 @@
-import { GET_DECKS, SAVE_DECK, RECEIVE_DECKS, ADD_DECK, ADD_CARD } from "../actions";
+import {
+  GET_DECKS,
+  SAVE_DECK,
+  RECEIVE_DECKS,
+  ADD_DECK,
+  ADD_CARD,
+  DELETE_DECK,
+  DELETE_CARD,
+} from "../actions";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -16,17 +24,30 @@ export default (state = {}, action) => {
           questions: [],
         },
       };
-      case ADD_CARD:
-        const {title, card} = action
-        return {
-          ...state,
-          [title]: {
-            ...state[title],
-            questions: [...state[title].questions].concat(card)
-          }
-        }
+    case ADD_CARD:
+      const { title, card } = action;
+      return {
+        ...state,
+        [title]: {
+          ...state[title],
+          questions: [...state[title].questions].concat(card),
+        },
+      };
+    case DELETE_DECK:
+      const { [action.deck]: deleted, ...newDecks } = state;
+      return newDecks;
+
+    case DELETE_CARD:
+      return {
+        ...state,
+        [action.title]: {
+          ...state[action.title],
+          questions: [...state[action.title].questions].filter(
+            (item, index) => index !== action.index
+          ),
+        },
+      };
     default:
-      // console.log(action);
       return state;
   }
 };

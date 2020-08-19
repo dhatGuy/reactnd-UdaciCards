@@ -31,9 +31,16 @@ export const saveDeckTitle = async(deck) => {
   }))
 }
 
+export const removeDeck = async(deck) =>{
+  const data = await getDecks()
+  const decks = JSON.parse(data)
+
+  const { [deck]: deleted, ...newDecks} = decks;  
+  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
+}
+
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title. 
 export const addCardToDeck = async (title,card)=>{
-  // console.log(title);
   const deck = await getDeck(title)
   const newDeck = {
     [title]: {
@@ -41,6 +48,25 @@ export const addCardToDeck = async (title,card)=>{
     }
   }
   return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));
+}
+
+export const removeCard = async(title, id)=>{
+  const data = await getDecks()
+  const decks = JSON.parse(data)
+  const ques = decks[title].questions
+
+  const newDecks = {
+    ...decks,
+    [title]:{
+      ...decks[title],
+      questions:decks[title].questions.filter((item, index) => index !== id)
+  }
+}
+  // return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newDecks))
+}
+
+export const resetStore = async()=>{
+  return await AsyncStorage.clear()
 }
 
 // {
