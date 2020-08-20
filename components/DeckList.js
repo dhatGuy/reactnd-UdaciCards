@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import { Text, ScrollView } from "react-native";
 import Card from "./Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { handleInitialData } from "../actions";
 import styled from "styled-components/native";
 import { Button } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { HeaderBackButton } from "@react-navigation/stack";
 
 const Empty = styled.View`
   flex: 1;
@@ -20,14 +19,6 @@ const DeckList = ({ navigation }) => {
   useEffect(() => {
     dispatch(handleInitialData());
   }, []);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <HeaderBackButton onPress={() => navigation.navigate("Flashcards")} />
-      ),
-    });
-  }, [navigation]);
 
   if (Object.keys(decks).length === 0) {
     return (

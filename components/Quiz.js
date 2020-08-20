@@ -94,7 +94,7 @@ const Quiz = ({ route, navigation }) => {
         <Text>This deck is empty.</Text>
         <Button
           mode="contained"
-          onPress={() => navigation.navigate("New Card", { id: deck.title })}
+          onPress={() => navigation.navigate("New Card", { title: deck.title })}
         >
           Add card
         </Button>

@@ -16,9 +16,10 @@ const NewCard = ({ route, navigation }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const dispatch = useDispatch();
+  const title = route.params.title;
 
+  console.log(title);
   const onSubmit = () => {
-    const title = route.params.title;
     addCardToDeck(title, {
       question,
       answer,
@@ -27,7 +28,7 @@ const NewCard = ({ route, navigation }) => {
     });
     setQuestion("");
     setAnswer("");
-    navigation.goBack();
+    navigation.navigate("Individual Card");
   };
 
   return (
