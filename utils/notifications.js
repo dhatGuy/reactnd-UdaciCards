@@ -20,10 +20,10 @@ export const setNotification = async () => {
         Permissions.getAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
           if (status === "granted") {
             Notifications.cancelAllScheduledNotificationsAsync();
-            let tomorrow = new Date()
-          tomorrow.setDate(tomorrow.getDate() + 1)
-          tomorrow.setHours(20)
-          tomorrow.setMinutes(0)
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(20);
+            tomorrow.setMinutes(0);
             Notifications.scheduleNotificationAsync({
               content: {
                 title: "Practice",
@@ -38,10 +38,11 @@ export const setNotification = async () => {
                   vibrate: true,
                 },
               },
-              trigger:{
-                time: tomorrow,
-                repeats: "day"
-              }
+              trigger: {
+                hour: 15,
+                minute: 0,
+                repeats: true,
+              },
             });
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           }

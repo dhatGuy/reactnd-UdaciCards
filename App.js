@@ -13,7 +13,7 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 import middlewares from "./middlewares/logger";
 import { setNotification } from "./utils/notifications";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import {
   FontAwesome,
   MaterialCommunityIcons,
@@ -24,7 +24,7 @@ const store = createStore(reducers, middlewares);
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const Tabs = () => {
+const Tabs = (props) => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -63,7 +63,7 @@ const Tabs = () => {
   );
 };
 
-const Navigator = () => {
+const Navigator = (props) => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -73,21 +73,13 @@ const Navigator = () => {
           backgroundColor: "tomato",
         },
       }}
-      headerMode="screen"
     >
-      <Stack.Screen
-        name="Flashcards"
-        component={Tabs}
-        options={{
-          headerStyle: {
-            backgroundColor: "tomato",
-          },
-          headerTitleAlign: "center",
-        }}
-      />
+      <Stack.Screen name="Flashcards" component={Tabs} />
       <Stack.Screen
         name="Individual Card"
-        options={{ title: "Deck" }}
+        options={{
+          title: "Deck",
+        }}
         component={IndividualCard}
       />
       <Stack.Screen name="New Card" component={NewCard} />
@@ -97,22 +89,13 @@ const Navigator = () => {
   );
 };
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "tomato",
-    accent: "yellow",
-  },
-};
-
 export default function App() {
   useEffect(() => {
     setNotification();
   }, []);
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
+      <PaperProvider>
         <NavigationContainer>
           <Navigator />
         </NavigationContainer>

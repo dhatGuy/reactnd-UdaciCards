@@ -2,7 +2,6 @@ import React, { useLayoutEffect } from "react";
 import { View } from "react-native";
 import Card from "./Card";
 import { getDeck, removeDeck } from "../utils/api";
-import { HeaderBackButton } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteDeck } from "../actions";
 import { Button } from "react-native-paper";
@@ -24,13 +23,6 @@ const IndividualCard = ({ route, navigation }) => {
       navigation.navigate("Home");
     });
   };
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <HeaderBackButton onPress={() => navigation.navigate("Flashcards")} />
-      ),
-    });
-  }, [navigation]);
 
   if (!deck) return null;
 

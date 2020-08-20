@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import FlipCard from "react-native-flip-card";
 import { deleteCard } from "../actions";
-import { removeCard, resetStore } from "../utils/api";
+import { removeCard } from "../utils/api";
 import {
   cancelAllNotifications,
   setNotification,
@@ -37,6 +37,8 @@ const Face = styled.View`
   background-color: rgb(255, 255, 255);
   justify-content: center;
   align-items: center;
+  border: 2px solid tomato;
+  border-radius: 10px;
 `;
 
 const Back = styled.View`
@@ -44,6 +46,8 @@ const Back = styled.View`
   background-color: #f1c40f;
   justify-content: center;
   align-items: center;
+  border: 2px solid tomato;
+  border-radius: 10px;
 `;
 
 const BtnWrapper = styled.View`

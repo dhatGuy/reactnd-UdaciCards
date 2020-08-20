@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { addCard } from "../actions";
 import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
-import { useTheme } from "@react-navigation/native";
 
 const Container = styled.View`
   justify-content: center;
@@ -17,7 +16,6 @@ const NewCard = ({ route, navigation }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const dispatch = useDispatch();
-  const theme = useTheme();
 
   const onSubmit = () => {
     const title = route.params.title;
@@ -50,7 +48,6 @@ const NewCard = ({ route, navigation }) => {
         disabled={question === "" || answer === ""}
         onPress={onSubmit}
         style={{ marginTop: 10 }}
-        // dark={true}
         mode="contained"
       >
         Submit

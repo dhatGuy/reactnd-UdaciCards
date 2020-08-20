@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { View } from "react-native";
 import { saveDeckTitle } from "../utils/api";
 import { useDispatch } from "react-redux";
 import { addDeck } from "../actions";
