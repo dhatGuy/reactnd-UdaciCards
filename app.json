@@ -1,5 +1,6 @@
 {
   "expo": {
+    "sdkVersion": "38.0.0",
     "name": "mobile-flashcards",
     "slug": "mobile-flashcards",
     "version": "1.0.0",
@@ -17,13 +18,19 @@
       "**/*"
     ],
     "android": {
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "enableDangerousExperimentalLeanBuilds": true,
+      "package": "org.flashcards.exp"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "org.flashcards.exp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "notification": {
+      "icon": "./assets/favicon.png"
     },
     "description": "Udacity React Nanodegree Final Project",
     "githubUrl": "https://github.com/dhatGuy/reactnd-mobile-flashcards"
