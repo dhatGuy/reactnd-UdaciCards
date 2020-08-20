@@ -1,8 +1,8 @@
 {
   "expo": {
     "sdkVersion": "38.0.0",
-    "name": "mobile-flashcards",
-    "slug": "mobile-flashcards",
+    "name": "Udacicards",
+    "slug": "UdaciCards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,11 +20,11 @@
     "android": {
       "useNextNotificationsApi": true,
       "enableDangerousExperimentalLeanBuilds": true,
-      "package": "org.flashcards.exp"
+      "package": "org.udacicards.exp"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.flashcards.exp"
+      "bundleIdentifier": "org.udacicards.exp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
