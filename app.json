@@ -1,16 +1,11 @@
 {
   "expo": {
     "sdkVersion": "38.0.0",
-    "name": "Udacicards",
+    "name": "UdaciCards",
     "slug": "UdaciCards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -20,11 +15,24 @@
     "android": {
       "useNextNotificationsApi": true,
       "enableDangerousExperimentalLeanBuilds": true,
-      "package": "org.udacicards.exp"
+      "package": "org.udacicards.exp",
+      "splash": {
+        "mdpi": "./assets/drawable-mdpi/splash.png",
+        "hdpi": "./assets/drawable-hdpi/splash.png",
+        "xhdpi": "./assets/drawable-xhdpi/splash.png",
+        "xxhdpi": "./assets/drawable-xxhdpi/splash.png",
+        "xxxhdpi": "./assets/drawable-xxxhdpi/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      }
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.udacicards.exp"
+      "bundleIdentifier": "org.udacicards.exp",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "cover"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +41,6 @@
       "icon": "./assets/favicon.png"
     },
     "description": "Udacity React Nanodegree Final Project",
-    "githubUrl": "https://github.com/dhatGuy/reactnd-mobile-flashcards"
+    "githubUrl": "https://github.com/dhatGuy/reactnd-UdaciCards"
   }
 }
