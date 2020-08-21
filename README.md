@@ -1,10 +1,11 @@
 # UdaciCards
 
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/@dhatguy/UdaciCards) [![runs with expo](https://img.shields.io/badge/Android-4630EB.svg?style=for-the-badge&logo=ANDROID&labelColor=000&logoColor=fff)](https://expo.io/@dhatguy/UdaciCards) [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat&logo=EXPO&labelColor=ffffff&logoColor=000)](https://expo.io/@dhatguy/UdaciCards)
+
 The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks, built with React-Native, Redux, JavaScript and styled with Styled-Components.
 
-## Project Screen Shot(s)
-
-![udacicards-min](https://user-images.githubusercontent.com/51405947/90862799-e330c080-e385-11ea-8d13-8f0d0a29d86f.gif)
+## Project Screenshot
+<img src="https://user-images.githubusercontent.com/51405947/90862799-e330c080-e385-11ea-8d13-8f0d0a29d86f.gif" height="450"/>
 
 ## Installation and Setup Instructions
 
@@ -20,7 +21,7 @@ To Start Expo:
 
 ## Reflection
 
-This is the third and final project for Udacity React Nanodegree. This project encompasses the fundamental aspects of building a native application including handling infinite lists, routing, and user input. By building this project, I gained an understanding of how to use React Native to build an iOS and Android application.
+This is the third and final project for [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019). This project encompasses the fundamental aspects of building a native application including handling infinite lists, routing, and user input. By building this project, I gained an understanding of how to use React Native to build an iOS and Android application.
 
 ## Specific Requirements
 
@@ -33,10 +34,10 @@ This is the third and final project for Udacity React Nanodegree. This project e
 
 ## Tools Used
 
-- Expo
-- React Native Paper
-- Styled-Component
-- React Navigations
+- [Expo](https://expo.io)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [Styled-Component](https://styled-components.com/)
+- [React Navigations](https://navigation.org/)
 - Redux
 - React-Redux
 - AsyncStorage
