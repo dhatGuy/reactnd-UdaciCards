@@ -1,14 +1,10 @@
-# Mobile Flashcards
+# UdaciCards
 
 The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks, built with React-Native, Redux, JavaScript and styled with Styled-Components.
 
 ## Project Screen Shot(s)
 
-#### Example:
-
-[ PRETEND SCREEN SHOT IS HERE ]
-
-[ PRETEND OTHER SCREEN SHOT IS HERE ]
+![udacicards-min](https://user-images.githubusercontent.com/51405947/90862799-e330c080-e385-11ea-8d13-8f0d0a29d86f.gif)
 
 ## Installation and Setup Instructions
 
